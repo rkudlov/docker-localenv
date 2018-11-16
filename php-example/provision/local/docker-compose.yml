@@ -1,0 +1,41 @@
+version: "3.7"
+  
+services:
+  php-nginx:
+    image: "rkudlov/php-nginx:7.2"
+    build: 
+      context: ../docker-image/php7-nginx
+    environment:
+      PHP_ENV: development
+      NGINX_SERVER_NAME: php.workshop.loc
+      PHP_XDEBUG_ENABLED: 1
+      PHP_SENDMAIL_PATH: mailhog:1025
+    networks:
+      - localnet
+    volumes:
+      - ../../app/docroot:/var/www/html
+    labels:
+      - "traefik.basic.frontend.rule=Host:php.workshop.loc"
+      - "traefik.enable=true"
+      - "traefik.port=80"
+
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: 'drupal'
+    volumes:
+      - ./docker-runtime/mysql:/var/lib/mysql
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    networks:
+      - localnet
+    labels:
+      - "traefik.frontend.rule=Host:mailhog.php.workshop.loc"
+      - "traefik.enable=true"
+      - "traefik.port=8025"
+
+networks:
+  localnet:
+    external: true
