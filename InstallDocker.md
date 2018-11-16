@@ -1,10 +1,12 @@
-#Ubuntu
+# Ubuntu
 ## Install Docker
 
 ```
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
 
+#remove script after successful installation
+rm get-docker.sh
 #Start docker service
 sudo service docker start
 

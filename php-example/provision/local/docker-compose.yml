@@ -15,6 +15,7 @@ services:
       #PHP_XDEBUG_REMOTE_HOST: host.docker.internal
     networks:
       - localnet
+      - default
     volumes:
       - ../../app/docroot:/var/www/html
     labels:
@@ -34,6 +35,7 @@ services:
     image: mailhog/mailhog:latest
     networks:
       - localnet
+      - default
     labels:
       - "traefik.frontend.rule=Host:mailhog.php.workshop.loc"
       - "traefik.enable=true"

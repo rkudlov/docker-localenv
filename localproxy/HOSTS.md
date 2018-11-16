@@ -10,7 +10,7 @@ open /etc/hosts and add to it
 DONE!
 
 
-#Windows 
+# Windows 
 
 open C:\Windows\System32\drivers\etc\hosts and add to it
 
