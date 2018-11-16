@@ -3,7 +3,5 @@ sites/*/private
 sites/*/settings.php
 
 .idea
-vendor
 docker-runtime
-node_modules
 
