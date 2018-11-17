@@ -19,7 +19,8 @@ services:
     volumes:
       - ../../app/docroot:/var/www/html
     labels:
-      - "traefik.basic.frontend.rule=Host:php.workshop.loc"
+      - "traefik.docker.network=localnet"
+      - "traefik.frontend.rule=Host:php.workshop.loc"
       - "traefik.enable=true"
       - "traefik.port=80"
 
@@ -37,6 +38,7 @@ services:
       - localnet
       - default
     labels:
+      - "traefik.docker.network=localnet"
       - "traefik.frontend.rule=Host:mailhog.php.workshop.loc"
       - "traefik.enable=true"
       - "traefik.port=8025"

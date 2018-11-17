@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+  golang:
+    image: "rkudlov/golang:1.11-alpine"
+    build:
+      context: ../docker-images/golang
+    networks:
+      - localnet
+      - default
+    environment:
+      PACKAGE_NAME: github.com/josephspurrier/gowebapp
+      APP_CONFIG: local
+    volumes:
+      - ../../app:/go/src/github.com/josephspurrier/gowebapp
+    labels:
+      - "traefik.frontend.rule=Host:golang.workshop.loc"
+      - "traefik.docker.network=localnet"
+      - "traefik.enable=true"
+      - "traefik.port=80"
+
+  mongodb:
+    image: mongo:3.4.2
+    volumes:
+      - ./docker-runtime/db:/data/db
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    networks:
+      - localnet
+      - default
+    labels:
+      - "traefik.docker.network=localnet"
+      - "traefik.frontend.rule=Host:mailhog.golang.workshop.loc"
+      - "traefik.enable=true"
+      - "traefik.port=8025"
+
+
+networks:
+  localnet:
+    external: true
+
