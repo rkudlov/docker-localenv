@@ -1,5 +1,6 @@
 1) Run containers<br>
 ```
+cd nodejs-example
 cd provision/local
 docker-compose pull
 docker-compose up -d
