@@ -13,6 +13,7 @@ services:
       APP_CONFIG: local
     volumes:
       - ../../app:/go/src/github.com/josephspurrier/gowebapp
+      - ./docker-runtime/libs:/go/src/
     labels:
       - "traefik.frontend.rule=Host:golang.workshop.loc"
       - "traefik.docker.network=localnet"
